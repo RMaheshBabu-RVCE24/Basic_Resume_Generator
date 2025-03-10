@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>R Mahesh Babu | EL-1</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    @page {
+      size: A4;
+      margin: 1cm;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { margin: 0; }
+      .resume-container { page-break-after: always; overflow: visible; }
+      .section-content,
+      .experience-main,
+      .contact-edu { page-break-inside: avoid; }
+    }
+    body {
+      margin: 20px;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #000;
+    }
+    body.dark-mode {
+      background-color: #121212;
+      color: #f8f9fa;
+    }
+    body.dark-mode .navbar {
+      background-color: #343a40 !important;
+    }
+    body.dark-mode .resume-container {
+      background-color: #222;
+      color: #f8f9fa;
+    }
+    body.dark-mode .form-control,
+    body.dark-mode .form-control-file {
+      background-color: #333;
+      color: #fff;
+      border-color: #555;
+    }
+    .container-custom {
+      max-width: 1200px;
+      margin: 20px 20px;
+    }
+    .resume-container {
+      width: 210mm;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      box-sizing: border-box;
+      margin: auto;
+    }
+    .template1 {
+      font-family: 'Segoe UI', sans-serif;
+      color: inherit;
+    }
+    .template1 .header-section {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .template1 .header-section img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-right: 15px;
+      object-fit: cover;
+    }
+    .template1 .header-section .info { line-height: 1.2; }
+    .template1 .header-section .info .name {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .template1 .section-title {
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 1rem;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+    }
+    .template1 .section-content { margin-bottom: 1rem; }
+    .template1 .side-by-side {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .template1 .side-by-side .chip {
+      background: #f2f2f2;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 0.85rem;
+    }
+    .template2 {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: inherit;
+    }
+    .template2 .top-section {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .template2 .top-section img {
+      width: 100px;
+      height: 100px;
+      border-radius: 5px;
+      object-fit: cover;
+      margin-right: 20px;
+    }
+    .template2 .top-section .name-title { line-height: 1.2; }
+    .template2 .top-section .name-title .name {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+    .template2 .contact-edu { margin-bottom: 20px; }
+    .template2 .experience-main {
+      border-left: 1px solid #ddd;
+      padding-left: 10px;
+    }
+    .template2 .section-heading {
+      font-weight: bold;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+    .template2 .contact-edu p,
+    .template2 .experience-main p {
+      margin-bottom: 0.5rem;
+    }
+    
+    .btn { margin-top: 10px; }
+  
+    nav.navbar {
+  margin: 0;
+  width: 100%;
+}
+@media (orientation: landscape) {
+  nav.navbar {
+    margin: 0;
+    width: 100%;
+  }
+}</style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark no-print">
+    <a class="navbar-brand" href="#">
+      Resume
+    </a>
+    <button id="modeToggle" class="btn btn-primary ml-auto" type="button">Dark Mode</button>
+  </nav>
+  
+  <div class="container container-custom">
+    <div class="row" id="mainRow">
+      <div id="formCol" class="col-12 no-print">
+        <h1>Resume Generator | By R Mahesh Babu</h1>
+        <p>Fill in your details and select a Resume template.</p>
+        <form id="resumeForm">
+          <!-- Form Fields -->
+          <div class="form-group">
+            <label for="name">Full Name:</label>
+            <input type="text" class="form-control" id="name" placeholder="e.g. John Doe" required>
+          </div>
+          <div class="form-group">
+            <label for="jobTitle">Job Title / Profession:</label>
+            <input type="text" class="form-control" id="jobTitle" placeholder="e.g. Marketing Manager">
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address:</label>
+            <input type="email" class="form-control" id="email" placeholder="e.g. john@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number:</label>
+            <input type="text" class="form-control" id="phone" placeholder="e.g. 123-456-7890">
+          </div>
+          <div class="form-group">
+            <label for="location">Location:</label>
+            <input type="text" class="form-control" id="location" placeholder="e.g. Bloomington, IN">
+          </div>
+          <div class="form-group">
+            <label for="github">GitHub URL:</label>
+            <input type="url" class="form-control" id="github" placeholder="https://github.com/username">
+          </div>
+          <div class="form-group">
+            <label for="linkedin">LinkedIn URL:</label>
+            <input type="url" class="form-control" id="linkedin" placeholder="https://linkedin.com/in/username">
+          </div>
+          <div class="form-group">
+            <label for="summary">Professional Summary:</label>
+            <textarea class="form-control" id="summary" rows="3" placeholder="Brief summary..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="experience">Work Experience:</label>
+            <textarea class="form-control" id="experience" rows="4" placeholder="Describe your work experience..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="skills">Skills (comma-separated):</label>
+            <input type="text" class="form-control" id="skills" placeholder="e.g. HR, Team Leadership, Communication">
+          </div>
+          <div class="form-group">
+            <label for="education">Education:</label>
+            <textarea class="form-control" id="education" rows="3" placeholder="List your degrees, institutions, etc."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="languages">Languages:</label>
+            <input type="text" class="form-control" id="languages" placeholder="e.g. English, Spanish">
+          </div>
+          <div class="form-group">
+            <label>Choose a Template:</label><br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="templateChoice" id="template1" value="template1" required>
+              <label class="form-check-label" for="template1">Template 1</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="templateChoice" id="template2" value="template2" required>
+              <label class="form-check-label" for="template2">Template 2</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="profilePhoto">Profile Photo:</label>
+            <input type="file" class="form-control-file" id="profilePhoto" accept="image/*">
+          </div>
+          <button type="submit" class="btn btn-danger">Generate Resume</button>
+        </form>
+      </div>
+      <div id="resumeCol" class="col-md-6" style="display: none;">
+        <div id="resumeOutput"></div>
+        <div class="no-print text-center mt-3">
+          <button class="btn btn-success" onclick="window.print()">Print Resume</button>
+          <button class="btn btn-primary" onclick="downloadResumePDF()">Download Resume</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function downloadResumePDF() {
+      const resume = document.getElementById('resumeOutput');
+      const opt = {
+        margin: 1,
+        filename: 'resume.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(resume).save();
+    }
+
+    // Toggle dark mode
+    const modeToggle = document.getElementById('modeToggle');
+    modeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      modeToggle.textContent = document.body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+    });
+    
+    function createShortLink(url, label) {
+      return url ? `<a href="${url}" target="_blank">${label}</a>` : '';
+    }
+    
+    const form = document.getElementById('resumeForm');
+    const resumeOutput = document.getElementById('resumeOutput');
+    const formCol = document.getElementById('formCol');
+    const resumeCol = document.getElementById('resumeCol');
+    
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value;
+      const jobTitle = document.getElementById('jobTitle').value || '';
+      const email = document.getElementById('email').value || '';
+      const phone = document.getElementById('phone').value || '';
+      const location = document.getElementById('location').value || '';
+      const github = document.getElementById('github').value || '';
+      const linkedin = document.getElementById('linkedin').value || '';
+      const summary = document.getElementById('summary').value || '';
+      const experience = document.getElementById('experience').value || '';
+      const skills = document.getElementById('skills').value || '';
+      const education = document.getElementById('education').value || '';
+      const languages = document.getElementById('languages').value || '';
+      
+      const profilePhotoInput = document.getElementById('profilePhoto');
+      let profilePhotoUrl = 'https://via.placeholder.com/80';
+      let profilePhotoUrlTemplate2 = 'https://via.placeholder.com/100';
+      if (profilePhotoInput.files && profilePhotoInput.files[0]) {
+        profilePhotoUrl = URL.createObjectURL(profilePhotoInput.files[0]);
+        profilePhotoUrlTemplate2 = profilePhotoUrl;
+      }
+      
+      const selectedTemplate = document.querySelector('input[name="templateChoice"]:checked').value;
+      const githubLink = createShortLink(github, 'GitHub Profile');
+      const linkedinLink = createShortLink(linkedin, 'LinkedIn Profile');
+      const skillsArray = skills.split(',').map(s => s.trim()).filter(Boolean);
+      
+      let resumeHTML = '';
+      
+      if (selectedTemplate === 'template1') {
+        resumeHTML = `
+          <div class="resume-container template1">
+            <div class="header-section">
+              <img src="${profilePhotoUrl}" alt="Profile Photo">
+              <div class="info">
+                <div class="name">${name}</div>
+                <div class="job-title">${jobTitle}</div>
+                <div>${email} | ${phone}</div>
+                <div>${location}</div>
+                <div>${githubLink ? 'GitHub: ' + githubLink : ''}</div>
+                <div>${linkedinLink ? 'LinkedIn: ' + linkedinLink : ''}</div>
+              </div>
+            </div>
+            ${summary ? `<div class="section-title">Professional Summary</div>
+              <div class="section-content"><p>${summary}</p></div>` : ''}
+            ${experience ? `<div class="section-title">Work Experience</div>
+              <div class="section-content"><p>${experience.replace(/\n/g, '<br>')}</p></div>` : ''}
+            ${skillsArray.length ? `<div class="section-title">Skills & Competencies</div>
+              <div class="section-content side-by-side">${skillsArray.map(skill => `<div class="chip">${skill}</div>`).join('')}</div>` : ''}
+            ${education ? `<div class="section-title">Education</div>
+              <div class="section-content"><p>${education.replace(/\n/g, '<br>')}</p></div>` : ''}
+            ${languages ? `<div class="section-title">Languages</div>
+              <div class="section-content"><p>${languages}</p></div>` : ''}
+          </div>
+        `;
+      } else if (selectedTemplate === 'template2') {
+        resumeHTML = `
+          <div class="resume-container template2">
+            <div class="top-section">
+              <img src="${profilePhotoUrlTemplate2}" alt="Profile Photo">
+              <div class="name-title">
+                <div class="name">${name}</div>
+                <div class="job-title">${jobTitle}</div>
+              </div>
+            </div>
+            <div class="contact-edu">
+              <div class="section-heading">Contact</div>
+              <p><strong>Email:</strong> ${email}</p>
+              <p><strong>Phone:</strong> ${phone}</p>
+              <p><strong>Location:</strong> ${location}</p>
+              ${githubLink ? `<p><strong>GitHub:</strong> ${githubLink}</p>` : ''}
+              ${linkedinLink ? `<p><strong>LinkedIn:</strong> ${linkedinLink}</p>` : ''}
+              ${education ? `<div class="section-heading">Education</div>
+                <p>${education.replace(/\n/g, '<br>')}</p>` : ''}
+              ${skillsArray.length ? `<div class="section-heading">Expertise</div>
+                <p>${skillsArray.join(', ')}</p>` : ''}
+              ${languages ? `<div class="section-heading">Language(s)</div>
+                <p>${languages}</p>` : ''}
+            </div>
+            <div class="experience-main">
+              ${summary ? `<div class="section-heading">Professional Summary</div>
+                <p>${summary}</p>` : ''}
+              ${experience ? `<div class="section-heading">Experience</div>
+                <p>${experience.replace(/\n/g, '<br>')}</p>` : ''}
+            </div>
+          </div>
+        `;
+      }
+      
+      resumeOutput.innerHTML = resumeHTML;
+      formCol.className = "col-md-6 no-print";
+      resumeCol.className = "col-md-6";
+      resumeCol.style.display = "block";
+      
+      window.scrollTo({ top: resumeOutput.offsetTop, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
